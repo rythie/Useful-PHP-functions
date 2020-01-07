@@ -15,14 +15,7 @@
 
 function array_subset($whitelist, $array)
 {
-    $out_array = array();
-    if(!empty($array))
-    {
-        foreach($array as $key => $value)
-        {
-            if(in_array($key, $whitelist, TRUE))
-                $out_array[$key] = $value;
-        }
-    }
-    return $out_array;
+     return array_filter($array, function ($key) use ($whitelist) {
+        return in_array($key, $whitelist, TRUE);
+     }, ARRAY_FILTER_USE_KEY);
 }
